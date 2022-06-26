@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Shower Presentation Engine</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="node_modules/@shower/material/styles/styles.css"
+    />
+    <style>
+      .shower {
+        --slide-ratio: calc(16 / 9);
+      }
+
+      .cover {
+        z-index: 1;
+      }
+
+      .slide {
+        background: url("pictures/background.png");
+      }
+
+      .slide h1,
+      .slide h2,
+      .slide h3,
+      .slide h4,
+      .slide h5,
+      .slide h6 {
+        color: #58c3e9;
+      }
+
+      .slide li {
+        color: #71bbb9;
+      }
+
+      .slide li:before {
+        color: #497f91 !important;
+      }
+
+      .slide li.no-before:before {
+        content: "";
+      }
+
+      .slide.no-counter:after {
+        content: "";
+      }
+
+      .chapter h1 {
+        font-size: 96px;
+        line-height: 120px;
+        text-align: center;
+      }
+
+      .chapter h2 {
+        font-size: 72px;
+        font-weight: bold;
+        line-height: 100px;
+        text-align: center;
+        margin: 32px 0;
+      }
+
+      .title-with-code {
+        padding-top: 60px;
+      }
+
+      .title-with-code h1 {
+        margin-top: 0;
+      }
+
+      .slide .code {
+        background-color: #1e1e1e;
+        padding: 16px 40px;
+        display: inline-block;
+        border-radius: 16px;
+        padding-left: 80px;
+        border: 2px solid #9cdcf0;
+
+        counter-reset: item;
+        list-style-type: none;
+      }
+
+      .slide .code li {
+        color: #dddddd !important;
+        line-height: 44px;
+      }
+
+      .slide .code li:before {
+        color: #808073 !important;
+        content: counter(item) "  ";
+        counter-increment: item;
+        margin-right: 8px;
+        transform: translateX(calc(-120% - 0.5em));
+      }
+
+      .code .system {
+        color: #3e9cd6 !important;
+      }
+
+      .code .variable {
+        color: #9cdcf0 !important;
+      }
+
+      .code .function {
+        color: #dcdcaa !important;
+      }
+
+      .code .component {
+        color: #4ec9b0 !important;
+      }
+
+      .code .string {
+        color: #ce7d4d !important;
+      }
+
+      .code .tag {
+        color: #808073 !important;
+      }
+
+      .code .comments {
+        color: #00a000 !important;
+      }
+    </style>
+  </head>
+  <body class="shower list">
+    <header class="caption">
+      <h1>Shower Presentation Engine</h1>
+      <p>Yours Truly, Famous Inc.</p>
+    </header>
+
+    <!-- 2. Logo -->
+    <section class="slide" style="background: black">
+      <img
+        class="cover"
+        src="pictures/logo.png"
+        alt="Hands on the orange typewriter in a park"
+      />
+    </section>
+
+    <!-- 2. hello -->
+    <section class="slide" style="background: black">
+      <img
+        class="cover"
+        src="pictures/hello.png"
+        alt="Hands on the orange typewriter in a park"
+      />
+    </section>
+
+    <!-- 3. subscribe -->
+    <section class="slide" style="background: black">
+      <img
+        class="cover"
+        src="pictures/subscribe.png"
+        alt="Hands on the orange typewriter in a park"
+      />
+    </section>
+
+    <!-- 4. Анонс тем -->
+    <section class="slide">
+      <h1>Зачем мне смотреть этот доклад?</h1>
+      <ul>
+        <li class="next">Изучим исходники <u>Context API</u></li>
+        <li class="next">
+          Изучим реальный пример замены <u>Redux</u> на <u>Context API</u>
+        </li>
+        <li class="next">
+          Изучим лучшие примеры использования <u>Context API</u>
+        </li>
+        <li class="next">И многое другое</li>
+      </ul>
+    </section>
+
+    <!-- 5. Заголовок, Исходники -->
+    <section class="slide chapter">
+      <h1>Исходники</h1>
+    </section>
+
+    <!-- 6. createContext() -->
+    <section class="slide title-with-code">
+      <h1>
+        Создание контекста
+        <a
+          href="https://github.com/facebook/react/blob/v18.1.0/packages/react/src/ReactContext.js#L14"
+          target="_blank"
+          >(исходники)</a
+        >
+      </h1>
+      <pre>
+        <ol class="code">
+          <li><span class="system">const</span> <span class="variable">MyContext</span> = <span class="variable">React</span>.<span class="function">createContext</span>();</li>
+        </ol>
+      </pre>
+    </section>
+
+    <!-- 7. как выглядит нода -->
+    <section class="slide title-with-code no-counter">
+      <h1>Пример ноды в виртуальном дереве</h1>
+      <pre>
+        <ol class="code">
+          <li>{ <span class="comments">// console.log(&lt;span&gt;test&lt;/span&gt;)</span></li>
+          <li>&nbsp;&nbsp;<span class="variable">$$typeof</span>:&nbsp;<span class="component">Symbol</span>(<span class="variable">react.element</span>),</li>
+          <li>&nbsp;&nbsp;<span class="variable">type</span>:&nbsp;<span class="string">'span'</span>,</li>
+          <li>&nbsp;&nbsp;<span class="variable">key</span>:&nbsp;<span class="system">null</span>,</li>
+          <li>&nbsp;&nbsp;<span class="variable">props</span>:&nbsp;{</li>
+          <li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">children</span>:&nbsp;<span class="string">'test'</span>,</li>
+          <li>&nbsp;&nbsp;},</li>
+          <li>}</li>
+        </ol>
+      </pre>
+    </section>
+
+    <!-- 8. Consumer / Provider -->
+    <section class="slide title-with-code">
+      <h1>Вот что означают Provider / Consumer</h1>
+      <pre>
+        <ol class="code">
+          <li><span class="tag">&lt;</span><span class="component">MyContext.Provider</span> <span class="variable">value={</span><span class="tag">/* some value */</span><span class="variable">}</span><span class="tag">&gt;</span></li>
+          <li><span class="tag">&lt;/</span><span class="component">MyContext.Provider</span><span class="tag">&gt;</span></li>
+        </ol>
+      </pre>
+      <pre>
+        <ol class="code">
+          <li><span class="tag">&lt;</span><span class="component">MyContext.Consumer</span><span class="tag">&gt;</span></li>
+          <li>&nbsp;&nbsp;{value => <span class="tag">/* render something  */</span>}</li>
+          <li><span class="tag">&lt;/</span><span class="component">MyContext.Consumer</span><span class="tag">&gt;</span></li>
+        </ol>
+      </pre>
+    </section>
+
+    <!-- 9. Provider исходники -->
+    <section class="slide title-with-code">
+      <h1>
+        Как работает Provider
+        <a
+          href="https://github.com/facebook/react/blob/v18.1.0/packages/react-reconciler/src/ReactFiberBeginWork.new.js#L3333"
+          target="_blank"
+          >(исходники)</a
+        >
+      </h1>
+      <pre>
+        <ol class="code">
+          <li><span class="tag">&lt;</span><span class="component">MyContext.Provider</span> <span class="variable">value={</span><span class="tag">/* some value */</span><span class="variable">}</span><span class="tag">&gt;</span></li>
+          <li><span class="tag">&lt;/</span><span class="component">MyContext.Provider</span><span class="tag">&gt;</span></li>
+        </ol>
+      </pre>
+    </section>
+
+    <!-- 10. Consumer исходники -->
+    <section class="slide title-with-code">
+      <h1>
+        Как работает Consumer
+        <a
+          href="https://github.com/facebook/react/blob/v18.1.0/packages/react-reconciler/src/ReactFiberBeginWork.new.js#L3399"
+          target="_blank"
+          >(исходники)</a
+        >
+      </h1>
+      <pre>
+        <ol class="code">
+          <li><span class="tag">&lt;</span><span class="component">MyContext.Consumer</span><span class="tag">&gt;</span></li>
+          <li>&nbsp;&nbsp;{value => <span class="tag">/* render something  */</span>}</li>
+          <li><span class="tag">&lt;/</span><span class="component">MyContext.Consumer</span><span class="tag">&gt;</span></li>
+        </ol>
+      </pre>
+    </section>
+
+    <!-- 11. useContext исходники -->
+    <section class="slide title-with-code">
+      <h1>
+        Как работает useContext( )
+        <a
+          href="https://github.com/facebook/react/blob/v18.1.0/packages/react-reconciler/src/ReactFiberHooks.new.js#L2459"
+          target="_blank"
+          >(исходники)</a
+        >
+      </h1>
+      <pre>
+        <ol class="code">
+          <li><span class="system">const</span> <span class="variable">value</span> = <span class="function">useContext</span>(<span class="variable">MyContext</span>);</li>
+        </ol>
+      </pre>
+    </section>
+
+    <!-- 12. Заголовок, Redux vs Context API -->
+    <section class="slide chapter">
+      <h1 style="margin-top: 0">Redux<br />vs<br />Context API</h1>
+    </section>
+
+    <!-- 13. С чего начать -->
+    <section class="slide chapter">
+      <h2>С чего начать?</h2>
+    </section>
+
+    <!-- 14. Redux provider -->
+    <section class="slide title-with-code no-counter">
+      <h1 style="margin-bottom: 18px">С чего начинается Redux:</h1>
+      <pre>
+        <ol class="code">
+          <li><span class="system">const</span> <span class="variable">store</span> = <span class="function">createStore</span>(<span class="variable">rootReducer</span>)</li>
+          <li>&nbsp;</li>
+          <li><span class="function">render</span>(</li>
+          <li>&nbsp;&nbsp;<span class="tag">&lt;</span><span class="component">Provider</span> <span class="variable">store</span>=<span class="system">{</span><span class="variable">store</span><span class="system">}</span> <span class="tag">/&gt;</span></li>
+          <li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;</span><span class="component">App</span> <span class="tag">/&gt;</span></li>
+          <li>&nbsp;&nbsp;<span class="tag">&lt;/</span><span class="component">Provider</span><span class="tag">&gt;</span>,</li>
+          <li>&nbsp;&nbsp;<span class="variable">document</span>.<span class="function">getElementById</span>(<span class="string">'root'</span>)</li>
+          <li>)</li>
+        </ol>
+      </pre>
+    </section>
+
+    <!-- 14. Иходники Redux Provider  -->
+    <section class="slide chapter">
+      <h2>
+        Redux Provider
+        <a
+          href="https://github.com/reduxjs/react-redux/blob/v8.0.2/src/components/Provider.tsx#L27"
+          target="_blank"
+          >(исходники)</a
+        >
+      </h2>
+    </section>
+
+    <!-- 15. Правильный заголовок  -->
+    <section class="slide chapter">
+      <h2>React-Redux<br />vs<br />useState + Context</h2>
+    </section>
+
+    <!-- 16. Почему useState?  -->
+    <section class="slide chapter">
+      <h2>
+        React-Redux<br />vs<br /><span
+          style="text-decoration: underline; color: red"
+          >useState</span
+        >
+        + Context
+      </h2>
+    </section>
+
+    <!-- 17. useReducer -->
+    <section class="slide" style="background: black">
+      <img
+        class="cover"
+        src="pictures/useReducer.png"
+        alt="Hands on the orange typewriter in a park"
+      />
+    </section>
+
+    <!-- 18. no useReducer -->
+    <section class="slide no-counter" style="padding-top: 40px">
+      <div style="height: 100%; text-align: center">
+        <img
+          src="pictures/withUseState.jpeg"
+          alt="Hands on the orange typewriter in a park"
+          style="max-width: 100%; max-height: 47%"
+        />
+        <img
+          src="pictures/withoutUseReducer.jpeg"
+          alt="Hands on the orange typewriter in a park"
+          style="max-width: 100%; max-height: 45%"
+        />
+      </div>
+    </section>
+
+    <!-- 19. Правильный заголовок  -->
+    <section class="slide chapter">
+      <h2>React-Redux<br />vs<br />useState + Context</h2>
+    </section>
+
+    <!-- 20. Demo time  -->
+    <section class="slide chapter">
+      <h1>Демо!</h1>
+    </section>
+
+    <!-- 21. Исходники  -->
+    <section class="slide chapter">
+      <h2>
+        <a
+          href="https://github.com/Sin9k/useContextPlusUseReducer"
+          target="_blank"
+          >Демо исходники</a
+        >
+      </h2>
+    </section>
+
+    <!-- 22. Реальный фидбек  -->
+    <section class="slide chapter">
+      <h2>
+        Реальный фидбек
+        <a
+          href="https://github.com/Sin9k/useContextPlusUseReducer/pull/1"
+          target="_blank"
+          >(ссылка)</a
+        >
+      </h2>
+    </section>
+
+    <!-- 23. Попробуем подытожить -->
+    <section class="slide">
+      <h1>Попробуем подытожить:</h1>
+      <ul>
+        <li class="next">
+          <u>useState + useContext</u> используются на реальных проектах
+        </li>
+        <li class="next">Отсутствие <u>DevTools</u>:</li>
+        <li class="no-before">
+          <ul>
+            <li class="next">Нет возможности просмотреть весь <u>state</u></li>
+            <li class="next">Нет истории изменений</li>
+          </ul>
+        </li>
+        <li class="next">Малочисленное комьюнити</li>
+      </ul>
+    </section>
+
+    <!-- 24. Эффективный контекст  -->
+    <section class="slide chapter">
+      <h1>Эффективный контекст</h1>
+    </section>
+
+    <!-- 25. Вспомним основы  -->
+    <section class="slide chapter">
+      <h2>Вспомним основы</h2>
+    </section>
+
+    <!-- 26. Суть контекста -->
+    <section class="slide" style="background: black">
+      <img
+        class="cover"
+        src="pictures/phase1.png"
+        alt="Hands on the orange typewriter in a park"
+      />
+    </section>
+
+    <!-- 27. Не мои компоненты -->
+    <section class="slide" style="background: black">
+      <img
+        class="cover"
+        src="pictures/phase2.png"
+        alt="Hands on the orange typewriter in a park"
+      />
+    </section>
+
+    <!-- 28. Так живет npm -->
+    <section class="slide" style="background: black">
+      <img
+        class="cover"
+        src="pictures/phase3.png"
+        alt="Hands on the orange typewriter in a park"
+      />
+    </section>
+
+    <!-- 29. React Router  -->
+    <section class="slide chapter">
+      <h2>
+        React Router
+        <br />
+        <a
+          href="https://reactrouter.com/docs/en/v6/getting-started/overview#configuring-routes"
+          target="_blank"
+          >(ссылка)</a
+        >
+      </h2>
+    </section>
+
+    <!-- 30. Исходники React Router  -->
+    <section class="slide chapter">
+      <h2>
+        React Router
+        <a
+          href="https://github.com/remix-run/react-router/blob/v6.3.0/packages/react-router/lib/context.ts#L24"
+          target="_blank"
+          >(исходники)</a
+        >
+      </h2>
+    </section>
+
+    <!-- 31. Еще одна функция контекста  -->
+    <section class="slide chapter">
+      <h2>Еще одна фишка контекста</h2>
+    </section>
+
+    <!-- 32. tree1 -->
+    <section class="slide" style="background: black">
+      <img
+        class="cover"
+        src="pictures/tree1.png"
+        alt="Hands on the orange typewriter in a park"
+      />
+    </section>
+
+    <!-- 33. tree2 -->
+    <section class="slide" style="background: black">
+      <img
+        class="cover"
+        src="pictures/tree2.png"
+        alt="Hands on the orange typewriter in a park"
+      />
+    </section>
+
+    <!-- 34. tree3 -->
+    <section class="slide" style="background: black">
+      <img
+        class="cover"
+        src="pictures/tree3.png"
+        alt="Hands on the orange typewriter in a park"
+      />
+    </section>
+
+    <!-- 35. tree4 -->
+    <section class="slide" style="background: black">
+      <img
+        class="cover"
+        src="pictures/tree4.png"
+        alt="Hands on the orange typewriter in a park"
+      />
+    </section>
+
+    <!-- 36. tree5 -->
+    <section class="slide" style="background: black">
+      <img
+        class="cover"
+        src="pictures/tree5.png"
+        alt="Hands on the orange typewriter in a park"
+      />
+    </section>
+
+    <!-- 37. tree6 -->
+    <section class="slide" style="background: black">
+      <img
+        class="cover"
+        src="pictures/tree6.png"
+        alt="Hands on the orange typewriter in a park"
+      />
+    </section>
+
+    <!-- 38. tree7 -->
+    <section class="slide" style="background: black">
+      <img
+        class="cover"
+        src="pictures/tree7.png"
+        alt="Hands on the orange typewriter in a park"
+      />
+    </section>
+
+    <!-- 38. tree8 -->
+    <section class="slide" style="background: black">
+      <img
+        class="cover"
+        src="pictures/tree8.png"
+        alt="Hands on the orange typewriter in a park"
+      />
+    </section>
+
+    <!-- 39. tree9 -->
+    <section class="slide" style="background: black">
+      <img
+        class="cover"
+        src="pictures/tree9.png"
+        alt="Hands on the orange typewriter in a park"
+      />
+    </section>
+
+    <!-- 40. tree10 -->
+    <section class="slide" style="background: black">
+      <img
+        class="cover"
+        src="pictures/tree10.png"
+        alt="Hands on the orange typewriter in a park"
+      />
+    </section>
+
+    <!-- 41. А теперь задумайтесь -->
+    <section class="slide title-with-code">
+      <h1>На этом принципе и основа роутинг:</h1>
+      <pre>
+        <ol class="code">
+          <li><span class="tag">&lt;</span><span class="component">Route</span> <span class="variable">path</span>=<span class="string">"deals"</span> <span class="variable">element</span>={<span class="tag">&lt;</span><span class="component">DealsPage</span> <span class="tag">/&gt;</span>} <span class="tag">/&gt;</span></li>
+        </ol>
+      </pre>
+      <pre>
+        <ol class="code">
+          <li><span class="system">const</span> <span class="variable">location</span> = <span class="function">useLocation</span>()</li>
+        </ol>
+      </pre>
+    </section>
+
+    <!-- 42. router-tree -->
+    <section class="slide" style="background: black">
+      <img
+        class="cover"
+        src="pictures/router-tree.png"
+        alt="Hands on the orange typewriter in a park"
+      />
+    </section>
+
+    <!-- 43. router-tree-focused -->
+    <section class="slide" style="background: black">
+      <img
+        class="cover"
+        src="pictures/router-tree-focused.png"
+        alt="Hands on the orange typewriter in a park"
+      />
+    </section>
+
+    <!-- 44. Формы -->
+    <section class="slide title-with-code no-counter">
+      <h1 style="margin-bottom: 18px">Так же это используется для форм:</h1>
+      <pre>
+        <ol class="code">
+          <li><span class="tag">&lt;</span><span class="component">Form</span></li>
+          <li>&nbsp;&nbsp;<span class="variable">onSubmit</span>={<span class="function">onSubmit</span>}</li>
+          <li>&nbsp;&nbsp;<span class="variable">render</span>={({ <span class="function">handleSubmit</span> }) <span class="system">=></span> (</li>
+          <li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;</span><span class="system">form</span> <span class="variable">onSubmit</span>={<span class="function">handleSubmit</span>} <span class="tag">/&gt;</span></li>
+          <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;</span><span class="component">Field</span> <span class="variable">name</span>=<span class="string">"name"</span> <span class="variable">component</span>=<span class="string">"input"</span> <span class="tag">/&gt;</span></li>
+          <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;</span><span class="system">button</span> <span class="variable">type</span>=<span class="string">"submit"</span><span class="tag">&gt;</span>Submit<span class="tag">&lt;/</span><span class="system">button</span><span class="tag">&gt;</span></li>
+          <li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;/</span><span class="system">form</span><span class="tag">&gt;</span></li>
+          <li>)}<span class="tag">/&gt;</span></li>
+        </ol>
+      </pre>
+    </section>
+
+    <!-- 45. Исходники форм -->
+    <section
+      class="slide title-with-code"
+      style="
+        padding-bottom: 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <h1 style="font-size: 60px">
+        React Final Form
+        <a
+          href="https://github.com/final-form/react-final-form/blob/v6.5.9/src/ReactFinalForm.js#L196"
+          target="_blank"
+          >(исходники)</a
+        >
+      </h1>
+      <h1 style="font-size: 60px">
+        Formik
+        <a
+          href="https://github.com/jaredpalmer/formik/blob/v2.1.6/packages/formik/src/FormikContext.tsx#L8"
+          target="_blank"
+          >(исходники)</a
+        >
+      </h1>
+    </section>
+
+    <!-- 46. Подытожим -->
+    <section class="slide">
+      <h1>Итоги:</h1>
+      <ul>
+        <li class="next">Исходники <u>Context API</u> проще чем кажутся</li>
+        <li class="next">
+          Стоит ли начинать проект на <u>Context API</u>?
+          <span class="next" style="color: red">Не рекомендую</span>
+        </li>
+        <li class="next">
+          npm пакет наиболее эффективное место для <u>Context API</u>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 47. thank you -->
+    <section class="slide">
+      <img
+        class="cover"
+        src="pictures/thank-you.png"
+        alt="Hands on the orange typewriter in a park"
+      />
+    </section>
+
+    <footer class="badge">
+      <a href="https://github.com/shower/shower">Fork me on GitHub</a>
+    </footer>
+
+    <div class="progress"></div>
+
+    <script src="node_modules/@shower/core/dist/shower.js"></script>
+    <!-- Copyright © 2022 Yours Truly, Famous Inc. -->
+  </body>
+</html>
